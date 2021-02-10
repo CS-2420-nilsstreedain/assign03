@@ -11,6 +11,8 @@ class PriorityQueueTest {
 
 	private SimplePriorityQueue<Integer> singleInteger;
 	private SimplePriorityQueue<Integer> manyIntegers;
+	private SimplePriorityQueue<String> manyStrings;
+	private String allCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	
 	private Random rand;
 	
@@ -36,5 +38,18 @@ class PriorityQueueTest {
 	void testManyIntegers() {
 		System.out.print(manyIntegers.findMin());
 		assertTrue(manyIntegers.findMin() == 0);
+	}
+	
+	@Test
+	void testManyStrings() {
+		for (int i = 0; i < 1000; i++) {
+			String tempString = "";
+			for (int j = 0; j < 10; j++) {
+				tempString += allCharacters.charAt(rand.nextInt(26));
+			}
+			manyStrings.insert(tempString);
+		}
+		manyStrings.insert("a");
+		assertTrue(manyStrings.findMin() == "a");
 	}
 }
