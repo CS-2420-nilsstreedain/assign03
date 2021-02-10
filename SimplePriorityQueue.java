@@ -1,39 +1,60 @@
 package assign03;
 
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.NoSuchElementException;
 
-public class SimplePriorityQueue implements PriorityQueue {
+public class SimplePriorityQueue<E> implements PriorityQueue<E> {
+	
+	private int size = 0;
+	private Object[] arr;
+	private Comparator<? super E> cmp;
+	
+	private final int INITIAL_ARRAY_SIZE = 1000;
 
-	
-	
+	@SuppressWarnings("unchecked")
 	public SimplePriorityQueue() {
-		
+		arr =  (E[]) new Object[INITIAL_ARRAY_SIZE];
 	}
 
 
+	@SuppressWarnings("unchecked")
 	public SimplePriorityQueue(Comparator<? super E> cmp) {
-		
+		arr =  (E[]) new Object[INITIAL_ARRAY_SIZE];
+		this.cmp = cmp;
 	}
 
 
 	@Override
-	public Object findMin() throws NoSuchElementException {
+	public E findMin() throws NoSuchElementException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 
 	@Override
-	public Object deleteMin() throws NoSuchElementException {
+	public E deleteMin() throws NoSuchElementException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void insert(Object item) {
-		// TODO Auto-generated method stub
+		E goal = (E) item;
+		int low = 0, high = arr.length - 1, mid = high/2;
+		while(low <= high) {
+			mid = (low + high) / 2;
+			if(((Comparable<? super E>)item).compareTo((E)arr[mid]) == 0) 
+				break;
+			else if(((Comparable<? super E>)item).compareTo((E)arr[mid]) == -1) 
+				high = mid - 1;
+			else 
+				low = mid + 1;
+		}
+		
+		//actually add the thing, mid will be index
 		
 	}
 
@@ -47,14 +68,15 @@ public class SimplePriorityQueue implements PriorityQueue {
 
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
+		return size;
 	}
 
 
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
+		if (size == 0) {
+			return true;
+		}
 		return false;
 	}
 
