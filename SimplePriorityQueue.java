@@ -87,6 +87,9 @@ public class SimplePriorityQueue<E> implements PriorityQueue<E> {
 	 */
 	@SuppressWarnings("unchecked")
 	public int insertSearch(E goal) {
+		if (size == 0) {
+			return 0;
+		}
 		int low = 0, high = arr.length - 1, mid = high/2;
 		while(low <= high) {
 			mid = (low + high) / 2;
