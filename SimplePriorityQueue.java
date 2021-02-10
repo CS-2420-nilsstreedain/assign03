@@ -87,27 +87,23 @@ public class SimplePriorityQueue<E> implements PriorityQueue<E> {
 	 */
 	@SuppressWarnings("unchecked")
 	public int insertSearch(E goal) {
-		if (size == 0) {
-			return 0;
-		}
-		int low = 0, high = arr.length - 1, mid = high/2;
+		int low = 0, high = size - 1, mid = high/2;
 		while(low <= high) {
-			mid = (low + high) / 2;
-			if(compare(goal, (E)arr[mid]) == 0) 
-				break;
-			else if(compare(goal, (E)arr[mid]) == 1) 
-				high = mid - 1;
-			else 
+			mid = low + (high - low) / 2;
+			if(compare(goal, (E)arr[mid]) == 0)
+				return mid;
+			else if(compare(goal, (E)arr[mid]) == -1)
 				low = mid + 1;
+			else
+				high = mid - 1;
 		}
-		return mid;
+		return low;
 	}
 	
 	@SuppressWarnings("unchecked")
 	private int compare(E obj1, E obj2) {
-		if(cmp == null) {
+		if(cmp == null)
 			return ((Comparable<? super E>)obj1).compareTo(obj2);
-		}
 		return cmp.compare(obj1, obj2);
 	}
 
