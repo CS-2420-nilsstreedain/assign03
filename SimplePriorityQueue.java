@@ -92,7 +92,7 @@ public class SimplePriorityQueue<E> implements PriorityQueue<E> {
 			mid = low + (high - low) / 2;
 			if(compare(goal, (E)arr[mid]) == 0)
 				return mid;
-			else if(compare(goal, (E)arr[mid]) == -1)
+			else if(compare(goal, (E)arr[mid]) < 0)
 				low = mid + 1;
 			else
 				high = mid - 1;

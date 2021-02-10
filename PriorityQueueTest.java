@@ -11,10 +11,11 @@ class PriorityQueueTest {
 
 	private SimplePriorityQueue<Integer> singleInteger;
 	private SimplePriorityQueue<Integer> manyIntegers;
-	private SimplePriorityQueue<String> manyStrings;
-	private String allCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	
+	private SimplePriorityQueue<Double> manyDoubles;
+	private SimplePriorityQueue<Character> manyCharacters;
+
 	private Random rand;
+	private String allCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	
 	@BeforeEach
 	void TestSetup() {
@@ -24,9 +25,19 @@ class PriorityQueueTest {
 		singleInteger.insert(1);
 
 		manyIntegers = new SimplePriorityQueue<>();
-		for (int i = 100; i > 0; i--)
-			manyIntegers.insert(rand.nextInt(100) + 1);
+		for (int i = 0; i < 1000; i++)
+			manyIntegers.insert(rand.nextInt(999) + 1);
 		manyIntegers.insert(0);
+
+		manyDoubles = new SimplePriorityQueue<>();
+		for (int i = 0; i < 1000; i++)
+			manyDoubles.insert(rand.nextDouble() + 1.0);
+		manyDoubles.insert(0.0);
+		
+		manyCharacters = new SimplePriorityQueue<>();
+		for (int i = 0; i < 1000; i++)
+			manyCharacters.insert(allCharacters.charAt(rand.nextInt(26)));
+		manyCharacters.insert('A');
 	}
 
 	@Test
@@ -36,20 +47,16 @@ class PriorityQueueTest {
 
 	@Test
 	void testManyIntegers() {
-		System.out.print(manyIntegers.findMin());
 		assertTrue(manyIntegers.findMin() == 0);
+	}
+
+	@Test
+	void testManyDoubles() {
+		assertTrue(manyDoubles.findMin() == 0.0);
 	}
 	
 	@Test
-	void testManyStrings() {
-		for (int i = 0; i < 1000; i++) {
-			String tempString = "";
-			for (int j = 0; j < 10; j++) {
-				tempString += allCharacters.charAt(rand.nextInt(26));
-			}
-			manyStrings.insert(tempString);
-		}
-		manyStrings.insert("a");
-		assertTrue(manyStrings.findMin() == "a");
+	void testManyCharacters() {
+		assertTrue(manyCharacters.findMin() == 'A');
 	}
 }
