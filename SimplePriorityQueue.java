@@ -43,19 +43,25 @@ public class SimplePriorityQueue<E> implements PriorityQueue<E> {
 	@Override
 	public void insert(Object item) {
 		E goal = (E) item;
+		int index = insertSearch(goal);
+		
+		//actually add the thing at index
+		
+	}
+	
+	@SuppressWarnings("unchecked")
+	public int insertSearch(E goal) {
 		int low = 0, high = arr.length - 1, mid = high/2;
 		while(low <= high) {
 			mid = (low + high) / 2;
-			if(((Comparable<? super E>)item).compareTo((E)arr[mid]) == 0) 
+			if(((Comparable<? super E>)goal).compareTo((E)arr[mid]) == 0) 
 				break;
-			else if(((Comparable<? super E>)item).compareTo((E)arr[mid]) == -1) 
+			else if(((Comparable<? super E>)goal).compareTo((E)arr[mid]) == -1) 
 				high = mid - 1;
 			else 
 				low = mid + 1;
 		}
-		
-		//actually add the thing, mid will be index
-		
+		return mid;
 	}
 
 
