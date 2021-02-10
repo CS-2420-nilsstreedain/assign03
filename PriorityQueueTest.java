@@ -7,8 +7,11 @@ import org.junit.jupiter.api.Test;
 class PriorityQueueTest {
 
 	@Test
-	void test() {
-		fail("Not yet implemented");
+	void testOneElement() {
+		SimplePriorityQueue<Integer> small = new SimplePriorityQueue<Integer>();
+		small.insert(1);
+		assertTrue(small.findMin() == 1);
+		
 	}
 
 }

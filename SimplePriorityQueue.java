@@ -10,11 +10,12 @@ public class SimplePriorityQueue<E> implements PriorityQueue<E> {
 	private Object[] arr;
 	private Comparator<? super E> cmp;
 	
-	private final int INITIAL_ARRAY_SIZE = 1000;
+	private final int INITIAL_ARRAY_SIZE = 10;
 
 	@SuppressWarnings("unchecked")
 	public SimplePriorityQueue() {
 		arr =  (E[]) new Object[INITIAL_ARRAY_SIZE];
+		cmp = null;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -64,7 +65,6 @@ public class SimplePriorityQueue<E> implements PriorityQueue<E> {
 		E goal = (E) item;
 		int index = insertSearch(goal);
 		
-		//actually add the thing at index
 		if (arr.length == size) {
 			Object[] newArr = new Object[arr.length * 2];
 			for (int i = 0; i < arr.length; i++)
@@ -90,14 +90,22 @@ public class SimplePriorityQueue<E> implements PriorityQueue<E> {
 		int low = 0, high = arr.length - 1, mid = high/2;
 		while(low <= high) {
 			mid = (low + high) / 2;
-			if(((Comparable<? super E>)goal).compareTo((E)arr[mid]) == 0) 
+			if(compare(goal, (E)arr[mid]) == 0) 
 				break;
-			else if(((Comparable<? super E>)goal).compareTo((E)arr[mid]) == 1) 
+			else if(compare(goal, (E)arr[mid]) == 1) 
 				high = mid - 1;
 			else 
 				low = mid + 1;
 		}
 		return mid;
+	}
+	
+	@SuppressWarnings("unchecked")
+	private int compare(E obj1, E obj2) {
+		if(cmp == null) {
+			return ((Comparable<? super E>)obj1).compareTo(obj2);
+		}
+		return cmp.compare(obj1, obj2);
 	}
 
 	/**
