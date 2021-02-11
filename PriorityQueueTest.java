@@ -2,6 +2,7 @@ package assign03;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -14,6 +15,10 @@ class PriorityQueueTest {
 	private SimplePriorityQueue<Double> manyDoubles;
 	private SimplePriorityQueue<Character> manyCharacters;
 	private SimplePriorityQueue<String> manyStrings;
+	
+	private SimplePriorityQueue<Integer> insertAllIntegers;
+	
+	private ArrayList<Integer> arrayListIntegers;
 
 	private Random rand;
 	private String allCharacters = "abcdefghijklmnopqrstuvwxyz";
@@ -43,6 +48,13 @@ class PriorityQueueTest {
 				tempString += allCharacters.charAt(rand.nextInt(26));
 			manyStrings.insert(tempString);
 		}
+		
+		arrayListIntegers = new ArrayList<>();
+		for (int i = 0; i < 1000; i++)
+			arrayListIntegers.add(rand.nextInt(999) + 1);
+		insertAllIntegers.insertAll(arrayListIntegers);
+		
+		
 	}
 
 	@Test
@@ -73,5 +85,21 @@ class PriorityQueueTest {
 	void testManyStrings() {
 		manyStrings.insert("aaaaaaaaaa");
 		assertTrue(manyStrings.findMin().equals("aaaaaaaaaa"));
+	}
+	
+	@Test
+	void testClear() {
+		singleInteger.clear();
+		manyIntegers.clear();
+		manyDoubles.clear();
+		manyCharacters.clear();
+		manyStrings.clear();
+		assertTrue(singleInteger.isEmpty() && manyIntegers.isEmpty() && manyDoubles.isEmpty() && manyCharacters.isEmpty() && manyStrings.isEmpty());
+	}
+	
+	@Test 
+	void testInsertAllIntegers() {
+		insertAllIntegers.insert(0);
+		assertTrue(manyIntegers.findMin() == 0);
 	}
 }
