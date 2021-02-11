@@ -43,7 +43,8 @@ public class SimplePriorityQueue<E> implements PriorityQueue<E> {
 	public E findMin() throws NoSuchElementException {
 		if (size == 0)
 			throw new NoSuchElementException();
-		return (E) arr[size - 1]; //min is always at the highest index, size - 1
+		// min is always at the highest index, size - 1
+		return (E) arr[size - 1];
 	}
 
 	/**
@@ -58,7 +59,9 @@ public class SimplePriorityQueue<E> implements PriorityQueue<E> {
 		if (size == 0)
 			throw new NoSuchElementException();
 		size--;
-		return (E) arr[size]; //after decrementing size, the min is now at index size instead of size - 1
+
+		// after decrementing size, the min is now at index size instead of size - 1
+		return (E) arr[size];
 	}
 
 	/**
@@ -70,18 +73,24 @@ public class SimplePriorityQueue<E> implements PriorityQueue<E> {
 	@Override
 	public void insert(Object item) {
 		E goal = (E) item;
-		int index = insertSearch(goal); //calls the binary search helper method to determine the index to place an item
 
-		if (arr.length == size) { 		//checks if the backing array is full and a doubling is needed
+		// calls the binary search helper method to determine the index to place an item
+		int index = insertSearch(goal);
+
+		// checks if the backing array is full and a doubling is needed
+		if (arr.length == size) {
+			// Makes a new array of double length, copies all values over, and sets our
+			// array to the new larger one
 			Object[] newArr = new Object[arr.length * 2];
 			for (int i = 0; i < arr.length; i++)
 				newArr[i] = arr[i];
-			arr = newArr; 				//Makes a new array of double length, copies all values over, and sets
-										//our array to the new larger one
+			arr = newArr;
 		}
 
+		// Starts at the end of the array, and shifts values up 1 until reaching our
+		// desired placement
 		for (int i = size; i > index; i--)
-			arr[i] = arr[i - 1];		//Starts at the end of the array, and shifts values up 1 until reaching our desired placement
+			arr[i] = arr[i - 1];
 
 		arr[index] = item;
 		size++;
@@ -105,8 +114,11 @@ public class SimplePriorityQueue<E> implements PriorityQueue<E> {
 			else
 				high = mid - 1;
 		}
-		return low; //because of our additive shifting behavior, we return low to ensure we get a value 1 greater
-	}				//than the element the new element is less than
+
+		// because of our additive shifting behavior, we return low to ensure we get a
+		// value 1 greater than the element the new element is less than
+		return low;
+	}
 
 	/**
 	 * Inserts the specified elements into this priority queue.
@@ -118,8 +130,8 @@ public class SimplePriorityQueue<E> implements PriorityQueue<E> {
 	@SuppressWarnings("unchecked")
 	private int compare(E obj1, E obj2) {
 		if (cmp == null)
-			return ((Comparable<? super E>) obj1).compareTo(obj2); //default comparator
-		return cmp.compare(obj1, obj2); //passed in comparator
+			return ((Comparable<? super E>) obj1).compareTo(obj2); // default comparator
+		return cmp.compare(obj1, obj2); // passed in comparator
 	}
 
 	/**
@@ -128,7 +140,7 @@ public class SimplePriorityQueue<E> implements PriorityQueue<E> {
 	 * @param coll - the collection of elements to insert
 	 */
 	@Override
-	public void insertAll(Collection<? extends E> coll) {	
+	public void insertAll(Collection<? extends E> coll) {
 		for (Object object : coll)
 			insert(object);
 	}

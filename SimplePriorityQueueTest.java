@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * This class contains tests for the SimplePriiorityQueue class.
+ * 
  * @author Paul Nuffer, Nils Streedain
  * @version February 10, 2021
  */
@@ -25,15 +26,13 @@ class SimplePriorityQueueTest {
 	private SimplePriorityQueue<Integer> inverseInteger;
 	private SimplePriorityQueue<String> sizeSortStrings;
 	private SimplePriorityQueue<String> inverseSizeSortStrings;
-	
+
 	private Random rand;
-	private String allCharacters = "abcdefghijklmnopqrstuvwxyz";
 	private ArrayList<Integer> arrayListIntegers;
+	private String allCharacters = "abcdefghijklmnopqrstuvwxyz";
 
 	@BeforeEach
 	void TestSetup() {
-		
-		rand = new Random();
 
 		emptyInteger = new SimplePriorityQueue<>();
 		manyIntegers = new SimplePriorityQueue<>();
@@ -45,6 +44,7 @@ class SimplePriorityQueueTest {
 		sizeSortStrings = new SimplePriorityQueue<>((i1, i2) -> (i1.length() - i2.length()));
 		inverseSizeSortStrings = new SimplePriorityQueue<>((i1, i2) -> (i2.length() - i1.length()));
 
+		rand = new Random();
 		arrayListIntegers = new ArrayList<>();
 
 		for (int i = 0; i < 1000; i++) {
@@ -55,11 +55,11 @@ class SimplePriorityQueueTest {
 			inverseInteger.insert(rand.nextInt(999) + 1);
 
 			String tempString = "";
-			for (int j = 0; j < 10; j++) 
+			for (int j = 0; j < 10; j++)
 				tempString += allCharacters.charAt(rand.nextInt(26));
 			manyStrings.insert(tempString);
-			
-			for (int j = 0; j < rand.nextInt(15)+2; j++) 
+
+			for (int j = 0; j < rand.nextInt(15) + 2; j++)
 				tempString += allCharacters.charAt(rand.nextInt(26));
 			sizeSortStrings.insert(tempString);
 			inverseSizeSortStrings.insert(tempString);
@@ -104,8 +104,8 @@ class SimplePriorityQueueTest {
 		manyDoubles.clear();
 		manyCharacters.clear();
 		manyStrings.clear();
-		assertTrue(emptyInteger.isEmpty() && manyIntegers.isEmpty() && manyDoubles.isEmpty()
-				&& manyCharacters.isEmpty() && manyStrings.isEmpty()); //all queues must be empty to pass
+		assertTrue(emptyInteger.isEmpty() && manyIntegers.isEmpty() && manyDoubles.isEmpty() && manyCharacters.isEmpty()
+				&& manyStrings.isEmpty()); // all queues must be empty to pass
 	}
 
 	@Test
@@ -121,7 +121,7 @@ class SimplePriorityQueueTest {
 			insertAllIntegers.deleteMin();
 		});
 	}
-	
+
 	@Test
 	void testFindMinException() {
 		assertThrows(NoSuchElementException.class, () -> {
@@ -134,13 +134,13 @@ class SimplePriorityQueueTest {
 		inverseInteger.insert(1000);
 		assertEquals(1000, inverseInteger.findMin());
 	}
-	
-	@Test 
+
+	@Test
 	void testStringComparatorConstructor() {
 		sizeSortStrings.insert("a");
 		assertEquals("a", sizeSortStrings.findMin());
 	}
-	
+
 	@Test
 	void testInverseStringComparatorConstructor() {
 		inverseSizeSortStrings.insert("123456789012345678901234567890");
@@ -152,22 +152,22 @@ class SimplePriorityQueueTest {
 		manyIntegers.insert(0);
 		assertEquals(0, manyIntegers.deleteMin());
 	}
-	
+
 	@Test
 	void testManyRemove() {
-		for (int i = 0; i < 100; i++) 
+		for (int i = 0; i < 100; i++)
 			emptyInteger.insert(1);
-		for (int i = 0; i < 100; i++) 
+		for (int i = 0; i < 100; i++)
 			emptyInteger.deleteMin();
 		assertTrue(emptyInteger.isEmpty());
 	}
-	
+
 	@Test
 	void testManyRemoveLarge() {
 		manyIntegers.insert(0);
-		for (int i = 0; i < 100; i++) 
+		for (int i = 0; i < 100; i++)
 			manyIntegers.insert(-1);
-		for (int i = 0; i < 100; i++) 
+		for (int i = 0; i < 100; i++)
 			manyIntegers.deleteMin();
 		assertEquals(0, manyIntegers.findMin());
 	}
