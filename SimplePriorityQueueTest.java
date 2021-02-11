@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
  * @author Paul Nuffer, Nils Streedain
  * @version February 10, 2021
  */
-class PriorityQueueTest {
+class SimplePriorityQueueTest {
 
 	private SimplePriorityQueue<Integer> emptyInteger;
 	private SimplePriorityQueue<Integer> manyIntegers;
