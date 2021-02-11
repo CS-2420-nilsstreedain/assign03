@@ -62,7 +62,6 @@ class PriorityQueueTest {
 				tempString += allCharacters.charAt(rand.nextInt(26));
 			sizeSortStrings.insert(tempString);
 			inverseSizeSortStrings.insert(tempString);
-			
 		}
 	}
 
@@ -160,16 +159,25 @@ class PriorityQueueTest {
 		for (int i = 0; i < 100; i++) 
 			emptyInteger.deleteMin();
 		assertTrue(emptyInteger.isEmpty());
-		
 	}
 	
 	@Test
 	void testManyRemoveLarge() {
+		manyIntegers.insert(0);
 		for (int i = 0; i < 100; i++) 
-			manyIntegers.insert(0);
-		for (int i = 0; i < 99; i++) 
+			manyIntegers.insert(-1);
+		for (int i = 0; i < 100; i++) 
 			manyIntegers.deleteMin();
 		assertEquals(0, manyIntegers.findMin());
-		
+	}
+
+	@Test
+	void testEmptySize() {
+		assertEquals(0, emptyInteger.size());
+	}
+
+	@Test
+	void testLargeSize() {
+		assertEquals(1000, manyIntegers.size());
 	}
 }
