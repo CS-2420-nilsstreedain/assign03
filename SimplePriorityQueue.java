@@ -4,6 +4,14 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.NoSuchElementException;
 
+/**
+ * A priority queue that supports access of the minimum element only.
+ * 
+ * @author Paul Nuffer, Nils Streedain
+ * @version February 10, 2021
+ *
+ * @param <E> the type of elements contained in this priority queue
+ */
 public class SimplePriorityQueue<E> implements PriorityQueue<E> {
 
 	private int size = 0;
@@ -137,9 +145,7 @@ public class SimplePriorityQueue<E> implements PriorityQueue<E> {
 	 */
 	@Override
 	public boolean isEmpty() {
-		if (size == 0)
-			return true;
-		return false;
+		return size == 0;
 	}
 
 	/**
