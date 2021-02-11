@@ -28,33 +28,24 @@ class PriorityQueueTest {
 		rand = new Random();
 
 		singleInteger = new SimplePriorityQueue<>();
-
 		manyIntegers = new SimplePriorityQueue<>();
-		for (int i = 0; i < 1000; i++)
-			manyIntegers.insert(rand.nextInt(999) + 1);
-
 		manyDoubles = new SimplePriorityQueue<>();
-		for (int i = 0; i < 1000; i++)
-			manyDoubles.insert(rand.nextDouble() + 1.0);
-
 		manyCharacters = new SimplePriorityQueue<>();
-		for (int i = 0; i < 1000; i++)
-			manyCharacters.insert(allCharacters.charAt(rand.nextInt(26)));
-
 		manyStrings = new SimplePriorityQueue<>();
+		insertAllIntegers = new SimplePriorityQueue<>();
+		arrayListIntegers = new ArrayList<>();
+
 		for (int i = 0; i < 1000; i++) {
+			manyIntegers.insert(rand.nextInt(999) + 1);
+			manyDoubles.insert(rand.nextDouble() + 1.0);
+			manyCharacters.insert(allCharacters.charAt(rand.nextInt(26)));
+			arrayListIntegers.add(rand.nextInt(999) + 1);
+			
 			String tempString = "";
 			for (int j = 0; j < 10; j++)
 				tempString += allCharacters.charAt(rand.nextInt(26));
 			manyStrings.insert(tempString);
 		}
-		
-		arrayListIntegers = new ArrayList<>();
-		for (int i = 0; i < 1000; i++)
-			arrayListIntegers.add(rand.nextInt(999) + 1);
-		insertAllIntegers.insertAll(arrayListIntegers);
-		
-		
 	}
 
 	@Test
@@ -99,7 +90,8 @@ class PriorityQueueTest {
 	
 	@Test 
 	void testInsertAllIntegers() {
+		insertAllIntegers.insertAll(arrayListIntegers);
 		insertAllIntegers.insert(0);
-		assertTrue(manyIntegers.findMin() == 0);
+		assertTrue(insertAllIntegers.findMin() == 0);
 	}
 }

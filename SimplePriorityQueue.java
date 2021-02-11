@@ -119,7 +119,7 @@ public class SimplePriorityQueue<E> implements PriorityQueue<E> {
 	 * @param coll - the collection of elements to insert
 	 */
 	@Override
-	public void insertAll(Collection<? extends E> coll) {
+	public void insertAll(Collection<? extends E> coll) {	
 		for (Object object : coll)
 			insert(object);
 	}
