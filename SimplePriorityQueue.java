@@ -50,7 +50,7 @@ public class SimplePriorityQueue<E> implements PriorityQueue<E> {
 		if (size == 0)
 			throw new NoSuchElementException();
 		size--;
-		return (E) arr[size - 1];
+		return (E) arr[size];
 	}
 
 	/**
