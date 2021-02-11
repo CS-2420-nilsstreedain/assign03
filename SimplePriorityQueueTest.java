@@ -32,6 +32,7 @@ class SimplePriorityQueueTest {
 
 	@BeforeEach
 	void TestSetup() {
+		
 		rand = new Random();
 
 		emptyInteger = new SimplePriorityQueue<>();
@@ -104,7 +105,7 @@ class SimplePriorityQueueTest {
 		manyCharacters.clear();
 		manyStrings.clear();
 		assertTrue(emptyInteger.isEmpty() && manyIntegers.isEmpty() && manyDoubles.isEmpty()
-				&& manyCharacters.isEmpty() && manyStrings.isEmpty());
+				&& manyCharacters.isEmpty() && manyStrings.isEmpty()); //all queues must be empty to pass
 	}
 
 	@Test
