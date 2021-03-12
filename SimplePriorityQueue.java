@@ -8,7 +8,7 @@ import java.util.NoSuchElementException;
  * A priority queue that supports access of the minimum element only.
  * 
  * @author Paul Nuffer, Nils Streedain
- * @version February 10, 2021
+ * @version February 03, 2021
  *
  * @param <E> the type of elements contained in this priority queue
  */
